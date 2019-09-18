@@ -1,11 +1,12 @@
 import {NekoState} from "./NekoState";
 import {FETCH_NEKO, NekoActionTypes} from "./NekoAction";
+import {combineReducers} from "redux";
 
 const initialState: NekoState = {
     urls: []
 };
 
-export function nekoReducer(state = initialState, action: NekoActionTypes): NekoState {
+function nekoReducer(state = initialState, action: NekoActionTypes): NekoState {
     switch (action.type) {
         case FETCH_NEKO:
             return state;
@@ -13,3 +14,9 @@ export function nekoReducer(state = initialState, action: NekoActionTypes): Neko
             return state;
     }
 }
+
+const reducer = combineReducers({
+    neko: nekoReducer
+});
+
+export default reducer
