@@ -3,12 +3,15 @@ import {FlatList, StyleSheet, View} from "react-native";
 import MainListItem from "./MainListItem";
 
 export default class Main extends React.PureComponent {
+    static navigationOptions = {
+        title: 'Neko',
+    };
+
     render() {
         return (
             <View style={styles.container}>
                 <FlatList
-                    data={[
-                    ]}
+                    data={[]}
                     numColumns={2}
                     renderItem={({item}) =>
                         <MainListItem url={item.url}/>
