@@ -7,11 +7,11 @@ export default class Main extends React.PureComponent {
         return (
             <View style={styles.container}>
                 <FlatList
-                    data={[]}
+                    data={[
+                    ]}
+                    numColumns={2}
                     renderItem={({item}) =>
-                        <MainListItem
-                            title={item.title}
-                            description={item.description}/>
+                        <MainListItem url={item.url}/>
                     }/>
             </View>
         );
@@ -22,5 +22,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        margin: 12,
     },
 });

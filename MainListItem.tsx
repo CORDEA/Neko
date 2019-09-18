@@ -1,17 +1,18 @@
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, View} from "react-native";
 
 interface Props {
-    title: string
-    description: string
+    url: string
 }
 
 export default class MainListItem extends React.PureComponent<Props> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>{this.props.title}</Text>
-                <Text style={styles.description}>{this.props.description}</Text>
+                <Image
+                    style={styles.image}
+                    source={{uri: this.props.url}}
+                />
             </View>
         );
     }
@@ -20,14 +21,9 @@ export default class MainListItem extends React.PureComponent<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        padding: 4,
     },
-    title: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 16,
-    },
-    description: {
-        fontSize: 12,
+    image: {
+        height: 160,
     },
 });
