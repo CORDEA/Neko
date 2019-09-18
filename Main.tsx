@@ -1,8 +1,11 @@
 import React from "react";
 import {FlatList, StyleSheet, View} from "react-native";
 import MainListItem from "./MainListItem";
+import {bindActionCreators} from "redux";
+import {fetchNeko} from "./NekoActions";
+import {connect} from "react-redux";
 
-export default class Main extends React.PureComponent {
+class Main extends React.PureComponent {
     static navigationOptions = {
         title: 'Neko',
     };
@@ -28,3 +31,9 @@ const styles = StyleSheet.create({
         margin: 12,
     },
 });
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({fetchNeko}, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Main)
