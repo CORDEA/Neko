@@ -1,20 +1,29 @@
 import React from "react";
 import {FlatList, StyleSheet, View} from "react-native";
 import MainListItem from "./MainListItem";
-import {bindActionCreators} from "redux";
 import {fetchNeko} from "./NekoActions";
 import {connect} from "react-redux";
+import Url from "./Url";
 
-class Main extends React.PureComponent {
+interface Props {
+    fetchNeko: () => {},
+    urls: Url[],
+}
+
+class Main extends React.PureComponent<Props> {
     static navigationOptions = {
         title: 'Neko',
     };
+
+    componentDidMount(): void {
+        this.props.fetchNeko();
+    }
 
     render() {
         return (
             <View style={styles.container}>
                 <FlatList
-                    data={[]}
+                    data={this.props.urls}
                     numColumns={2}
                     renderItem={({item}) =>
                         <MainListItem url={item.url}/>
@@ -33,7 +42,15 @@ const styles = StyleSheet.create({
 });
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({fetchNeko}, dispatch)
+    return {
+        fetchNeko: () => {
+            dispatch(fetchNeko())
+        }
+    }
 }
 
-export default connect(null, mapDispatchToProps)(Main)
+function mapStateToProps(state) {
+    return {urls: state.neko.urls}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
