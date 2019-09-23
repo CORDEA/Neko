@@ -5,10 +5,15 @@ import {fetchNeko} from "./NekoActions";
 import {connect} from "react-redux";
 import Url from "./Url";
 
-interface Props {
-    fetchNeko: () => {},
-    urls: Url[],
+type Actions = {
+    fetchNeko: () => void
 }
+
+type States = {
+    urls: Url[]
+}
+
+type Props = Actions & States
 
 class Main extends React.PureComponent<Props> {
     static navigationOptions = {
@@ -41,7 +46,7 @@ const styles = StyleSheet.create({
     },
 });
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch): Actions {
     return {
         fetchNeko: () => {
             dispatch(fetchNeko())
@@ -49,7 +54,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state): States {
     return {urls: state.neko.urls}
 }
 
